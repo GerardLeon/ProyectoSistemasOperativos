@@ -63,11 +63,11 @@ int main(int argc, char *argv[])
 	
 	/* consulta SQL para obtener una tabla con todos los datos
 	de la base de datos*/
-	err=mysql_query (conn, "SELECT * FROM jugador");
+	/*err=mysql_query (conn, "SELECT * FROM jugador");
 	if (err!=0) {
 		printf ("Error al consultar datos de la base %u %s\n", mysql_errno(conn), mysql_error(conn));
 		exit (1);
-	}
+	}*/
 	
 	/*Bucle de escucha a clientes*/
 	for (;;) {
@@ -114,8 +114,9 @@ int main(int argc, char *argv[])
 				//Registro(respuesta, nombre, contrasenya);
 				int err=0;
 				char con[300];
-				sprintf(con,"INSERT INTO JUGADOR VALUES(5,'%s','%s');", nombre, contrasenya);
-				//sprintf(con, "%s%s, %s);",con, nombre, contrasenya);
+				//sprintf(con, "SELECT COUNT(
+				sprintf(con,"INSERT INTO jugador VALUES(5,'%s','%s');", nombre, contrasenya);
+				printf("Consulta: %s\n",con);
 				err = mysql_query(conn,con);
 				//err = mysql_query(conn, con);
 				if (err!=0)
