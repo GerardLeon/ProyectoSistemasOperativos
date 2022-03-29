@@ -1,4 +1,0 @@
-C:\Users\Usuario\OneDrive\Escritorio\ProyectoSistemasOperativos\Proyecto1\Proyecto1\obj\x86\Debug\Proyecto1.csprojResolveAssemblyReference.cache
-C:\Users\Usuario\OneDrive\Escritorio\ProyectoSistemasOperativos\Proyecto1\Proyecto1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
-C:\Users\Usuario\OneDrive\Escritorio\ProyectoSistemasOperativos\Proyecto1\Proyecto1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
-C:\Users\Usuario\OneDrive\Escritorio\ProyectoSistemasOperativos\Proyecto1\Proyecto1\obj\x86\Debug\Proyecto1.csproj.GenerateResource.Cache

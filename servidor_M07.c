@@ -100,23 +100,33 @@ int main(int argc, char *argv[])
 				terminar=1;
 		
 			if (codigo==5) { //funcion de login de un usuario
-				p= strtok(peticion,"/");
+				p= strtok(NULL,"/");
 				char contrasenya[20];
 				strcpy (contrasenya, p);
 				sprintf(respuesta,"SELECT jugador.NOMBRE AND jugador.CONTRASENYA FROM (jugador)) WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s'",nombre,contrasenya);
 			}
 			
-			
-			/*if(codigo==6)
-			{ p= strtok(peticion,"/");
-			char contrasenya[20];
-			strcpy (contrasenya, p);
-			printf("%s\n",nombre);
-			printf("%s\n",contrasenya);
-			Registro(respuesta, nombre, contrasenya);
-			printf("Respuesta: %s\n", respuesta);
-			write(sock_conn,respuesta,strlen(respuesta));
-			}*/
+			if(codigo==6) {
+				p = strtok(NULL,"/");
+				char contrasenya[20];
+				strcpy (contrasenya, p);
+				printf("Contraseña: %s\n",contrasenya);
+				//Registro(respuesta, nombre, contrasenya);
+				int err=0;
+				char con[300];
+				sprintf(con,"INSERT INTO JUGADOR VALUES(5,'%s','%s');", nombre, contrasenya);
+				//sprintf(con, "%s%s, %s);",con, nombre, contrasenya);
+				err = mysql_query(conn,con);
+				//err = mysql_query(conn, con);
+				if (err!=0)
+				{
+					printf ("Error al registrar el jugador %u %s\n",
+							mysql_errno(conn), mysql_error(conn));
+					exit (1);
+				}
+				else
+				sprintf(respuesta, "Has sido registrado exitosamente\n");
+			}
 			if (codigo==1) {
 				sprintf(respuesta,"SELECT COUNT PARTIDA.ID_G FROM (RESUTADOS,PARTIDA,JUGADOR) WHERE PERONA.NOMBRE = '%s' AND PERSONA.ID=RESULTADOS.ID_J AND RESULTADOS.ID_P=PARTIDA.ID_P",nombre);
 				err=mysql_query (conn, consulta); 
@@ -142,7 +152,7 @@ int Registro(char respuesta[550],char nombre[30],char contrasenya[30]) {
 	int err;
 	char con[300];
 	strcpy(con ,"INSERT INTO JUGADOR VALUES(");
-	strcat (con, "0");
+	strcat (con, "0, nombre, contrasenya);");
 	strcat (con, ",'");
 	strcat (con, nombre);
 	strcat (con, "','");
