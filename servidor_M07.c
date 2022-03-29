@@ -114,19 +114,35 @@ int main(int argc, char *argv[])
 				//Registro(respuesta, nombre, contrasenya);
 				int err=0;
 				char con[300];
-				//sprintf(con, "SELECT COUNT(
-				sprintf(con,"INSERT INTO jugador VALUES(5,'%s','%s');", nombre, contrasenya);
+				sprintf(con, "SELECT COUNT(ID) FROM jugador WHERE ID IS NOT NULL;");
 				printf("Consulta: %s\n",con);
 				err = mysql_query(conn,con);
-				//err = mysql_query(conn, con);
-				if (err!=0)
-				{
-					printf ("Error al registrar el jugador %u %s\n",
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
 							mysql_errno(conn), mysql_error(conn));
 					exit (1);
 				}
-				else
-				sprintf(respuesta, "Has sido registrado exitosamente\n");
+				resultado = mysql_store_result (conn);
+				row = mysql_fetch_row (resultado);
+				if (row == NULL)
+					printf ("No se han obtenido datos en la consulta\n");
+				else {
+					int num = atoi(row[0]); 
+					num++;
+					printf("Resultado del count: %d\n",num);
+					sprintf(con,"INSERT INTO jugador VALUES(%d,'%s','%s');", num, nombre, contrasenya);
+					printf("Consulta: %s\n",con);
+					err = mysql_query(conn,con);
+					//err = mysql_query(conn, con);
+					if (err!=0)
+					{
+						printf ("Error al registrar el jugador %u %s\n",
+								mysql_errno(conn), mysql_error(conn));
+						exit (1);
+					}
+					else
+					sprintf(respuesta, "Has sido registrado exitosamente\n");
+				}
 			}
 			if (codigo==1) {
 				sprintf(respuesta,"SELECT COUNT PARTIDA.ID_G FROM (RESUTADOS,PARTIDA,JUGADOR) WHERE PERONA.NOMBRE = '%s' AND PERSONA.ID=RESULTADOS.ID_J AND RESULTADOS.ID_P=PARTIDA.ID_P",nombre);
