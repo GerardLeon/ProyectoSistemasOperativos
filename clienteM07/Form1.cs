@@ -27,6 +27,7 @@ namespace WindowsFormsApplication1
         private void label1_Click(object sender, EventArgs e)
         {
             
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,7 +53,6 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("No he podido conectar con el servidor");
                 return;
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -86,16 +86,16 @@ namespace WindowsFormsApplication1
             }
             if (P2.Checked)
             {
-                string mensaje = "2/" + nombre.Text;
+                string mensaje = "2/" + nombre.Text +"/"+ nombre2.Text;
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
 
                 //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
+                byte[] msg2 = new byte[300];
                 server.Receive(msg2);
                 mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("El numero de victorias es: " + mensaje);
+                MessageBox.Show("Los jugadores han jugado juntos en:\n" + mensaje);
             }
             if (P3.Checked)
             {
@@ -108,7 +108,9 @@ namespace WindowsFormsApplication1
                 byte[] msg2 = new byte[80];
                 server.Receive(msg2);
                 mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("El numero de victorias es: " + mensaje);
+                MessageBox.Show(mensaje);
+
+
             }
 
             if (P4.Checked)
@@ -119,10 +121,10 @@ namespace WindowsFormsApplication1
                 server.Send(msg);
 
                 //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
+                byte[] msg2 = new byte[500];
                 server.Receive(msg2);
                 mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("El numero de victorias es: " + mensaje);
+                MessageBox.Show("Tabla de Posiciones: " + mensaje);
 
             }
         }
@@ -150,6 +152,16 @@ namespace WindowsFormsApplication1
             server.Receive(msg2);
             mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
             MessageBox.Show(mensaje);
+
+        }
+
+        private void P3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contrasenya_TextChanged(object sender, EventArgs e)
+        {
 
         }
 
