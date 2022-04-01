@@ -5,4 +5,3 @@ Versión 1 generada por Gerard
 Versión 1 verificada por 
 Versión 1 comunicada por Juan
 URL del video: https://youtu.be/EY4ZdwVKLAA
-
