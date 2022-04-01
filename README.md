@@ -2,6 +2,6 @@
 "Monopoly (por concretar nombre preciso)" 
 
 Versión 1 generada por Gerard
-Versión 1 verificada por 
+Versión 1 verificada por David
 Versión 1 comunicada por Juan
 URL del video: https://youtu.be/EY4ZdwVKLAA

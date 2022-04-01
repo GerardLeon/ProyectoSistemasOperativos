@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	MYSQL_RES *resultado;
 	MYSQL_ROW row;
 	char nombre[20];
-	char consulta [300];
+	char consulta [400];
 	
 	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
 	if (conn==NULL) {
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 	//else printf("se ha inicializado la conexión 1\n");
 	conn = mysql_real_connect (conn, "localhost","root", "mysql", "basedatos",0, NULL, 0);
 	if (conn==NULL) {
-		printf ("Error al inicializar la conexi??n 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
+		printf ("Error al inicializar la conexion 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
 	/*Fin del bloque de inicialización de SQL*/
@@ -96,27 +96,18 @@ int main(int argc, char *argv[])
 				strcpy (nombre, p);
 				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
 			}
-			if (codigo ==0) //peticion de desconexi?n
+			if (codigo ==0) //peticion de desconexion
 				terminar=1;
-		
-			if (codigo==5) { //funcion de login de un usuario
+			
+			//funcion de login de un usuario
+			if (codigo==5) { 
 				p= strtok(NULL,"/");
 				char contrasenya[20];
 				strcpy (contrasenya, p);
-				sprintf(respuesta,"SELECT jugador.NOMBRE AND jugador.CONTRASENYA FROM (jugador)) WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s'",nombre,contrasenya);
-			}
-			
-			if(codigo==6) {
-				p = strtok(NULL,"/");
-				char contrasenya[20];
-				strcpy (contrasenya, p);
 				printf("Contraseña: %s\n",contrasenya);
-				//Registro(respuesta, nombre, contrasenya);
-				int err=0;
-				char con[300];
-				sprintf(con, "SELECT COUNT(ID) FROM jugador WHERE ID IS NOT NULL;");
-				printf("Consulta: %s\n",con);
-				err = mysql_query(conn,con);
+				sprintf(consulta, "SELECT jugador.ID FROM jugador WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s';", nombre, contrasenya);
+				
+				err = mysql_query(conn,consulta);
 				if (err!=0) {
 					printf ("Error al consultar datos de la base %u %s\n",
 							mysql_errno(conn), mysql_error(conn));
@@ -125,33 +116,175 @@ int main(int argc, char *argv[])
 				resultado = mysql_store_result (conn);
 				row = mysql_fetch_row (resultado);
 				if (row == NULL)
-					printf ("No se han obtenido datos en la consulta\n");
+					sprintf (respuesta, "No existe el usuario y/o la contrasenya es incorrecta\n");
+				else
+					sprintf(respuesta, "Login exitoso\n");
+			}
+			
+			//funcion de registro del usuario
+			if(codigo==6) { 
+				p = strtok(NULL,"/");
+				char contrasenya[20];
+				strcpy (contrasenya, p);
+				printf("Contraseña: %s\n",contrasenya);
+				int err=0;
+				char con[300];
+				sprintf(con, "SELECT COUNT(jugador.NOMBRE) from jugador WHERE jugador.NOMBRE = '%s'",nombre);
+				err = mysql_query(conn,con);
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
+							mysql_errno(conn), mysql_error(conn));
+					exit (1);
+				}
+				resultado = mysql_store_result (conn);
+				row = mysql_fetch_row (resultado);
+				int num = atoi (row[0]);
+				if (num!=0)
+					sprintf(respuesta, "El nombre de usuario ya existe\n");
 				else {
-					int num = atoi(row[0]); 
-					num++;
-					printf("Resultado del count: %d\n",num);
-					sprintf(con,"INSERT INTO jugador VALUES(%d,'%s','%s');", num, nombre, contrasenya);
-					printf("Consulta: %s\n",con);
+					sprintf(con, "SELECT COUNT(ID) FROM jugador WHERE ID IS NOT NULL;");
 					err = mysql_query(conn,con);
-					//err = mysql_query(conn, con);
-					if (err!=0)
-					{
-						printf ("Error al registrar el jugador %u %s\n",
+					if (err!=0) {
+						printf ("Error al consultar datos de la base %u %s\n",
 								mysql_errno(conn), mysql_error(conn));
 						exit (1);
 					}
-					else
-					sprintf(respuesta, "Has sido registrado exitosamente\n");
+					resultado = mysql_store_result (conn);
+					row = mysql_fetch_row (resultado);
+					if (row == NULL)
+						printf ("No se han obtenido datos en la consulta\n");
+					else {
+						int num = atoi(row[0]); 
+						num++;
+						sprintf(con,"INSERT INTO jugador VALUES(%d,'%s','%s',0);", num, nombre, contrasenya);
+						err = mysql_query(conn,con);
+						if (err!=0)
+						{
+							printf ("Error al registrar el jugador %u %s\n",
+									mysql_errno(conn), mysql_error(conn));
+							exit (1);
+						}
+						else
+							sprintf(respuesta, "Has sido registrado exitosamente\n");
+					}
 				}
+				
 			}
-			if (codigo==1) {
-				sprintf(respuesta,"SELECT COUNT PARTIDA.ID_G FROM (RESUTADOS,PARTIDA,JUGADOR) WHERE PERONA.NOMBRE = '%s' AND PERSONA.ID=RESULTADOS.ID_J AND RESULTADOS.ID_P=PARTIDA.ID_P",nombre);
+			
+			//Consulta para  saber la cantidad de partidas que ha ganado una persona
+			if (codigo==1) { 
+				int num = 0;
+				sprintf(consulta,"SELECT COUNT(resultados.PUNTOS) FROM partida,jugador, resultados \n");
+				strcat(consulta,"WHERE (resultados.ID_J = jugador.ID \nAND ");
+				strcat(consulta,"jugador.NOMBRE = partida.GANADOR \nAND resultados.ID_P = partida.ID \nAND ");
+				sprintf(consulta,"%sjugador.NOMBRE = '%s');", consulta, nombre);
 				err=mysql_query (conn, consulta); 
 				if (err!=0) {
 					printf ("Error al consultar datos de la base %u %s\n",
 					mysql_errno(conn), mysql_error(conn));
 				}
+				resultado = mysql_store_result (conn);
+				row = mysql_fetch_row (resultado);
+				if (row == NULL)
+					sprintf (respuesta, "El usuario aún no ha ganado una partida\n");
+				else {
+					num = atoi(row[0]);
+					sprintf(respuesta, "El jugador %s ha ganado %d partidas\n", nombre, num);
+				}
 			}
+			
+			//Consulta para saber en qué escenarios 2 jugadores han jugado juntos
+			if (codigo==2) { 
+				strcpy(respuesta,"");
+				char nombre2[20];
+				char tablero[20];
+				p = strtok(NULL, "/");
+				strcpy (nombre2, p);
+				printf ("Nombre2: %s\n", nombre2);
+				sprintf(consulta,"SELECT resultados.ID_P, partida.TABLERO FROM jugador,resultados,partida \n");
+				strcat(consulta,"WHERE resultados.ID_P = partida.ID AND \n");
+				sprintf(consulta,"%sjugador.NOMBRE = '%s' AND \n", consulta, nombre);
+				strcat(consulta,"jugador.ID = resultados.ID_J AND \n");
+				strcat(consulta,"resultados.ID_P IN (SELECT resultados.ID_P FROM \n");
+				strcat(consulta,"jugador,resultados WHERE \n");
+				sprintf(consulta,"%sjugador.NOMBRE = '%s' AND \n", consulta, nombre2);
+				strcat(consulta,"jugador.ID = resultados.ID_J);\n");
+				printf(consulta);
+				err=mysql_query (conn, consulta); 
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
+							mysql_errno(conn), mysql_error(conn));
+				}
+				resultado = mysql_store_result (conn);
+				int terminado = 0;
+				int ninguno =0;
+				while(terminado==0) {
+					row = mysql_fetch_row (resultado);
+					if (row == NULL) {
+						terminado=1;
+						if(ninguno == 0) 
+							sprintf(respuesta, "%sEn ningun sitio aun, colega.\n",respuesta);
+					}
+					else {
+						sprintf (tablero, "%s", row[1]);
+						sprintf(respuesta, "%s%s\n",respuesta, tablero);
+						ninguno++;
+					}
+				}
+				printf(respuesta);
+			}
+			
+			//Consulta para  saber en qué escenario he obtenido mas puntos
+			if (codigo==3) { 
+				sprintf(consulta,"SELECT partida.ID, partida.TABLERO, resultados.PUNTOS\n");
+				strcat(consulta,"FROM jugador,partida,resultados WHERE\n");
+				sprintf(consulta,"%s (jugador.NOMBRE = '%s' AND\n", consulta, nombre);
+				strcat(consulta,"jugador.ID = resultados.ID_J AND\n");
+				strcat(consulta,"resultados.ID_P = partida.ID)\n");
+				strcat(consulta,"ORDER BY resultados.PUNTOS DESC;\n");
+				err=mysql_query (conn, consulta); 
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
+							mysql_errno(conn), mysql_error(conn));
+				}
+				resultado = mysql_store_result (conn);
+				row = mysql_fetch_row (resultado);
+				if (row == NULL)
+					sprintf (respuesta, "Aún no has obtenido puntos\n");
+				else {
+					sprintf (resultado, "%s", row[1]);
+					printf("%s\n", resultado);
+					strcpy(respuesta, "El escenario donde has obtenido mas puntos es: ");
+					sprintf(respuesta, "%s%s\n", respuesta, resultado);
+				}
+			}
+			
+			//Consulta para saber el tablero de posiciones
+			if (codigo==4) { 
+				int num = 0;
+				strcpy(respuesta,"\n");
+				sprintf(consulta,"SELECT jugador.NOMBRE, jugador.PUNTOSACUM \n");
+				strcat(consulta,"FROM jugador ORDER BY jugador.PUNTOSACUM DESC;\n");
+				err=mysql_query (conn, consulta); 
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
+						mysql_errno(conn), mysql_error(conn));
+				}
+				resultado = mysql_store_result (conn);
+				int terminado = 0;
+				while(terminado==0) {
+					
+					row = mysql_fetch_row (resultado);
+					if (row == NULL)
+						terminado=1;
+					else {
+						sprintf (nombre, "%s", row[0]);
+						num = atoi(row[1]);
+						sprintf(respuesta, "%s%s ---- %d puntos\n",respuesta, nombre, num);
+					}
+				}
+			}
+			
 			if (codigo !=0) {
 				printf ("Respuesta: %s\n", respuesta); // Enviamos respuesta
 				write (sock_conn,respuesta, strlen(respuesta));
@@ -162,34 +295,4 @@ int main(int argc, char *argv[])
 		mysql_close (conn);
 		exit(0);
 	}
-	
 }
-/*
-int Registro(char respuesta[550],char nombre[30],char contrasenya[30]) {
-	int err;
-	char con[300];
-	strcpy(con ,"INSERT INTO JUGADOR VALUES(");
-	strcat (con, "0, nombre, contrasenya);");
-	strcat (con, ",'");
-	strcat (con, nombre);
-	strcat (con, "','");
-	strcat (con, contrasenya);
-	strcat (con,"',");
-	strcat (con, "0");
-	strcat (con, ",");
-	strcat (con, "0");
-	strcat (con, ");");
-
-	err=mysql_query (conn,con); 
-	if (err!=0) {
-		printf ("Error al introducir datos de la base %u %s\n", 7)
-		mysql_errno(conn), mysql_error(conn));
-		exit (1);
-		return -1;
-	}
-	else {
-	printf(respuesta,"Te has registrado correctamente\n");
-	return 0;
-	}
-}
-*/
