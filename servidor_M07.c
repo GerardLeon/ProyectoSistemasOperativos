@@ -1,6 +1,6 @@
 /*Servidor del proyecto del grupo 7
-Version: 2
-Fecha: 03/04/2022
+Version: 3
+Fecha: 02/05/2022
 Asignatura: Sistemes Operatius
 Profesor: M. Valero
 Autores: M. Jawhari, G. Leon, J. Martinez, D. Mur.
@@ -71,16 +71,12 @@ void QuitarConectados(ListaConectados *milista,int ID)
 void VerConectado(ListaConectados *milista, char conectados[512])
 {
 	int i;
-	//char conectados[512];
 	strcpy(conectados,"7/");
 	for(i =0;i<milista->num;i++)
 	{
 		sprintf(conectados,"%s%s\n",conectados,milista->conectados[i].nombre);
 	}
 	printf("%s\n",conectados);
-	/*int j;
-	for (j=0; j<i;j++)
-		write (sockets[j], conectados, strlen(conectados));*/
 }
 
 
@@ -139,6 +135,7 @@ void *AtenderCliente (void *socket)
 			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
 		//}
 		
+		//funcion de desconexión
 		if (codigo == 0)
 		{
 			p= strtok(NULL,"/");
@@ -158,7 +155,6 @@ void *AtenderCliente (void *socket)
 			IDjug = atoi(row[0]);
 			printf("El ID del jugador es: %d\n", IDjug);
 			QuitarConectados(&milista, IDjug);
-			//sprintf(respuesta, "6/Has sido registrado exitosamente\n");
 		}
 		//funcion de login de un usuario
 		if (codigo==5) { 
