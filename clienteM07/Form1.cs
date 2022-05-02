@@ -8,12 +8,17 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         Socket server;
+        Thread atender;
+
+        delegate void DelegadoParaEscribir(string mensaje);
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +33,51 @@ namespace WindowsFormsApplication1
         {
             
 
+        }
+
+        public void PonContador(string contador)
+        {
+            contLbl.Text = contador;
+        }
+
+        private void AtenderServidor()
+        {
+            while (true)
+            {
+                //Recibimos mensaje del servidor
+                byte[] msg2 = new byte[180];
+                server.Receive(msg2);
+                string[] trozos = Encoding.ASCII.GetString(msg2).Split('/');
+                int codigo = Convert.ToInt32(trozos[0]);
+                string mensaje = trozos[1].Split('\0')[0];
+
+                switch (codigo)
+                {
+                    case 1: //respuesta a numero de victorias
+                        MessageBox.Show("El numero de victorias es: " + mensaje);
+                        break;
+                    case 2:  //respuesta a jugadores que han jugado juntos 
+                        MessageBox.Show("Los jugadores han jugado juntos en:\n" + mensaje);
+                        break;
+                    case 3: //respuesta a escenario con más puntos
+                        MessageBox.Show(mensaje);
+                        break;
+                    case 4:  //respuesta a tabla de posiciones
+                        MessageBox.Show("Tabla de Posiciones: " + mensaje);
+                        break;
+                    case 5: //respuesta a login del usuario
+                        MessageBox.Show(mensaje);
+                        break;
+                    case 6: //respuesta a registro del usuario
+                        MessageBox.Show(mensaje);
+                        break;
+                    case 7: //recibimos notifcacion
+                        //contLbl.Text = mensaje;
+                        DelegadoParaEscribir delegado = new DelegadoParaEscribir(PonContador);
+                        contLbl.Invoke(delegado, new object [] {mensaje});
+                        break;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,6 +96,11 @@ namespace WindowsFormsApplication1
                 this.BackColor = Color.Green;
                 MessageBox.Show("Conectado");
 
+                //pongo en marcha el thread que atenderá los mensajes del servidor
+                ThreadStart ts = delegate { AtenderServidor(); };
+                atender = new Thread(ts);
+                atender.Start();
+
             }
             catch (SocketException ex)
             {
@@ -53,6 +108,8 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("No he podido conectar con el servidor");
                 return;
             }
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,6 +120,7 @@ namespace WindowsFormsApplication1
             server.Send(msg);
 
             // Nos desconectamos
+            atender.Abort();
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
@@ -77,12 +135,6 @@ namespace WindowsFormsApplication1
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
-
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("El numero de victorias es: " + mensaje);
             }
             if (P2.Checked)
             {
@@ -91,11 +143,6 @@ namespace WindowsFormsApplication1
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
 
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[300];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("Los jugadores han jugado juntos en:\n" + mensaje);
             }
             if (P3.Checked)
             {
@@ -103,13 +150,6 @@ namespace WindowsFormsApplication1
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
-
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show(mensaje);
-
 
             }
 
@@ -120,12 +160,6 @@ namespace WindowsFormsApplication1
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
 
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[500];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("Tabla de Posiciones: " + mensaje);
-
             }
         }
 
@@ -135,10 +169,6 @@ namespace WindowsFormsApplication1
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            MessageBox.Show (mensaje);
 
         }
 
@@ -148,10 +178,6 @@ namespace WindowsFormsApplication1
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            MessageBox.Show(mensaje);
 
         }
 

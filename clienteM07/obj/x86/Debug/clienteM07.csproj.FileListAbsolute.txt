@@ -16,3 +16,9 @@ C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\Proyect
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\31 03 Cliente\M07 - copia\clienteM07\clienteM07\obj\x86\Debug\clienteM07.pdb
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.exe
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache

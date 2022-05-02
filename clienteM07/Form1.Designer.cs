@@ -44,6 +44,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.contLbl = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(105, 56);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(735, 406);
             this.groupBox1.TabIndex = 0;
@@ -216,11 +217,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "NOMBRE";
             // 
+            // contLbl
+            // 
+            this.contLbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.contLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contLbl.Location = new System.Drawing.Point(765, 305);
+            this.contLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.contLbl.Name = "contLbl";
+            this.contLbl.Size = new System.Drawing.Size(197, 113);
+            this.contLbl.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 493);
+            this.Controls.Add(this.contLbl);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -248,6 +260,7 @@
         private System.Windows.Forms.RadioButton numero_victoria;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox nombre2;
+        private System.Windows.Forms.Label contLbl;
     }
 }
 
