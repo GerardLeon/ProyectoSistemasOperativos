@@ -21,6 +21,7 @@ int i;
 i=0;
 int sockets[100];
 int IDjug;
+int MAXID;
 
 //Estructura necesaria para acceso excluyente
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -39,6 +40,7 @@ ListaConectados milista;
 
 int PonerConectados(ListaConectados *milista,char nombre[30],int ID)
 { 
+	int correccionID = ID -1;
 	if (milista->num==100)
 		return -1;
 	else{
@@ -49,6 +51,21 @@ int PonerConectados(ListaConectados *milista,char nombre[30],int ID)
 		pthread_mutex_unlock( &mutex);
 		return 0;
 	}
+}
+
+void QuitarConectados(ListaConectados *milista,int ID)
+{
+	int i;
+	for(i = 0; i < milista->num; i++)
+	{
+		if(milista->conectados[i].ID==ID) {
+			printf("Esto lo hace");
+			for(int j = i; j < milista->num - 1; j++)
+				milista->conectados[j] = milista->conectados[j + 1];
+			milista->num=milista->num - 1;
+		}
+	}
+	
 }
 
 void VerConectado(ListaConectados *milista, char conectados[512])
@@ -116,24 +133,19 @@ void *AtenderCliente (void *socket)
 		int codigo =  atoi (p);
 		char nombre[20];
 		
-		if ((codigo !=0)) {
+		//if ((codigo !=0)) {
 			p = strtok( NULL, "/");
 			strcpy (nombre, p);
 			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
-		}
+		//}
 		
-		/*if (codigo == 8)
-		{
-			pthread_mutex_lock( &mutex);
-			PonerConectados(&milista, nombre, socket);
-			VerConectados(&milista);
-			pthread_mutex_unlock (&mutex);
-		}
-		*/
 		if (codigo == 0)
 		{
-			terminar=1;
-			/*sprintf(consulta, "SELECT jugador.ID FROM jugador WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s';", nombre, contrasenya);
+			p= strtok(NULL,"/");
+			char contrasenya[20];
+			strcpy (contrasenya, p);
+			printf("Contraseña: %s\n",contrasenya);
+			sprintf(consulta, "SELECT jugador.ID FROM jugador WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s';", nombre, contrasenya);
 			
 			err = mysql_query(conn,consulta);
 			if (err!=0) {
@@ -145,8 +157,8 @@ void *AtenderCliente (void *socket)
 			row = mysql_fetch_row (resultado);
 			IDjug = atoi(row[0]);
 			printf("El ID del jugador es: %d\n", IDjug);
-			QuitarConectados(&milista, nombre, IDjug);
-			sprintf(respuesta, "6/Has sido registrado exitosamente\n");*/
+			QuitarConectados(&milista, IDjug);
+			//sprintf(respuesta, "6/Has sido registrado exitosamente\n");
 		}
 		//funcion de login de un usuario
 		if (codigo==5) { 
@@ -355,7 +367,7 @@ void *AtenderCliente (void *socket)
 			printf ("Respuesta: %s\n", respuesta); // Enviamos respuesta
 			write (sock_conn,respuesta, strlen(respuesta));
 		}
-		if ((codigo == 1) || (codigo ==2) || (codigo ==3) || (codigo ==4) || (codigo ==5) || (codigo ==6))
+		if ((codigo == 0) || (codigo == 1) || (codigo ==2) || (codigo ==3) || (codigo ==4) || (codigo ==5) || (codigo ==6))
 		{
 			pthread_mutex_lock( &mutex);
 			char conectados[512];
@@ -369,7 +381,8 @@ void *AtenderCliente (void *socket)
 				write (sockets[j], conectados, strlen(conectados));
 			
 		}
-		
+		if (codigo == 0) 
+			terminar=1;
 		
 	}
 			

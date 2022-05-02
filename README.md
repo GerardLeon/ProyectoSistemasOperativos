@@ -1,6 +1,10 @@
 "Proyecto del grupo 7 de Sistemas Operativos (2021-22-Q2)" 
 "Nobody's Table" 
 
+Version 3 generada por Juan
+Version 3 comunicada por Gerard
+URL del Video:
+
 Versión 2 generada por Juan
 Versión 2 comunicada por Juan y Miguel
 URL del video (Demo Servidor): https://youtu.be/rOxwkDZjSLY

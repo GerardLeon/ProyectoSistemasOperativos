@@ -114,7 +114,7 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {  //Mensaje de desconexión
-            string mensaje = "0/";
+            string mensaje = "0/" + nombre.Text + "/" + contrasenya.Text;
 
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
