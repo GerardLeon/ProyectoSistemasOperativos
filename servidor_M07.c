@@ -96,24 +96,7 @@ void *AtenderCliente (void *socket)
 	int terminar =0;
 	/* Fin del bloque de inicializacion del socket*/
 	/*Inicializacion del bloque de consulta SQL*/
-	MYSQL *conn;
-	int err;
-	MYSQL_RES *resultado;
-	MYSQL_ROW row;
-	char nombre[20];
-	char consulta [400];
 	
-	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
-	if (conn==NULL) {
-		printf("Error al crear la conexion 1 %u %s\n", mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	//else printf("se ha inicializado la conexiÃ³n 1\n");
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "basedatos",0, NULL, 0);
-	if (conn==NULL) {
-		printf ("Error al inicializar la conexion 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
 	/* Entramos en un bucle para atender todas las peticiones de este cliente
 	hasta que se desconecte*/
 	while (terminar ==0) {
@@ -377,6 +360,36 @@ void *AtenderCliente (void *socket)
 				write (sockets[j], conectados, strlen(conectados));
 			
 		}
+
+
+		else if (codigo == 9){
+			p = strtok( NULL, "/");
+			numForm =  atoi(p);
+			char texto[500];
+			p = strtok(NULL,"/");
+			strcpy(texto, p);
+			char nombre[20];
+			p = strtok(NULL,"/");
+			strcpy(usuario, p);
+			p = strtok(NULL,"/");
+			int Id= atoi(p);
+			
+			char jugadores[200];
+			strcpy(jugadores, mispartidas.partidas[Id].jugadores);
+			
+			char *u = strtok(jugadores,"/");
+			while (u != NULL)
+			{
+				int socketjugador = DameSocket(&milista, u);
+				sprintf (respuesta, "9/%s-%s-%d", usuario, texto, numForm);
+				printf("Respuesta: %s\n", respuesta);
+				write(socketjugador,respuesta,strlen(respuesta));
+				u = strtok(NULL,"/");
+			}
+			
+			
+		}
+
 		if (codigo == 0) 
 			terminar=1;
 		
@@ -384,6 +397,23 @@ void *AtenderCliente (void *socket)
 			
 	// Se acabo el servicio para este cliente
 	close(sock_conn);
+}
+
+int DameSocket (ListaConectados *milista, char nombre[20]){
+	//Devueleve el socket
+	int i=0;
+	int encontrado = 0;
+	while ((i< milista->num) && !encontrado)
+	{
+		if (strcmp(milista->conectados[i].nombre, nombre) == 0)
+			encontrado =1;
+		if (!encontrado)
+			i=i+1;
+	}
+		if (encontrado)
+			return milista->conectados[i].socket;
+		else
+			return 0;
 }
 
 /*Nueva funcion principal*/
@@ -411,6 +441,25 @@ int main(int argc, char *argv[])
 	char peticion[512];  //inicialización de variables de petición-respuesta
 	char respuesta[512];
 	/* Fin del bloque de inicialización del socket*/
+
+	MYSQL *conn;
+	int err;
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	char nombre[20];
+	char consulta [400];
+	
+	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
+	if (conn==NULL) {
+		printf("Error al crear la conexion 1 %u %s\n", mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	//else printf("se ha inicializado la conexiÃ³n 1\n");
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "basedatos",0, NULL, 0);
+	if (conn==NULL) {
+		printf ("Error al inicializar la conexion 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
 	
 	pthread_t thread;
 	for (;;) {
@@ -425,7 +474,7 @@ int main(int argc, char *argv[])
 		
 		// Crear thead y decirle lo que tiene que hacer
 		
-		pthread_create (&thread, NULL, AtenderCliente,&sockets[i]);
+		pthread_create (&thread, NULL, AtenderCliente,&milista.conectados[milista.num-1].sockets);
 		i=i+1;
 		
 	}
