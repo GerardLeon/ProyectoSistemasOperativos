@@ -1,0 +1,39 @@
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\bin\Debug\InterfazJuego.exe
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\bin\Debug\InterfazJuego.pdb
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\obj\x86\Debug\InterfazJuego.Form1.resources
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\obj\x86\Debug\InterfazJuego.Properties.Resources.resources
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\obj\x86\Debug\InterfazJuego.csproj.GenerateResource.Cache
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+C:\Users\miguel.valero\AppData\Local\Temporary Projects\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.exe
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.pdb
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Form1.resources
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Properties.Resources.resources
+E:\Docencia\SO\2016-2017Q2\EjemploInterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csproj.GenerateResource.Cache
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.exe
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.pdb
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Form1.resources
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Properties.Resources.resources
+D:\Users\migue\Downloads\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csproj.GenerateResource.Cache
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Form1.resources
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Properties.Resources.resources
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csproj.GenerateResource.Cache
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csprojResolveAssemblyReference.cache
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.exe
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.pdb
+D:\Users\migue\Desktop\InterfazJuego\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.exe
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\bin\Debug\InterfazJuego.pdb
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csprojResolveAssemblyReference.cache
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Form1.resources
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.Properties.Resources.resources
+D:\Users\migue\Desktop\InterfazJuego - copia\InterfazJuego\InterfazJuego\obj\x86\Debug\InterfazJuego.csproj.GenerateResource.Cache
+C:\Users\Insti\Desktop\MonoTrivia\MonoTrivia\InterfazJuego\obj\x86\Debug\InterfazJuego.exe
+C:\Users\Insti\Desktop\MonoTrivia\MonoTrivia\InterfazJuego\obj\x86\Debug\InterfazJuego.pdb
