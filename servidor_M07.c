@@ -38,7 +38,7 @@ int num;
 
 ListaConectados milista;
 
-int PonerConectados(ListaConectados *milista,char nombre[30],int ID)
+int PonerConectados(ListaConectados *milista,char nombre[30],int ID) // Pone en conectados a un nuevo usuario, retorna un 0 si lo consigue o un -1 si no es capaz porque no tiene hueco
 { 
 	int correccionID = ID -1;
 	if (milista->num==100)
@@ -53,7 +53,7 @@ int PonerConectados(ListaConectados *milista,char nombre[30],int ID)
 	}
 }
 
-void QuitarConectados(ListaConectados *milista,int ID)
+void QuitarConectados(ListaConectados *milista,int ID) // Quita a un usuario de la lista de conectados
 {
 	int i;
 	for(i = 0; i < milista->num; i++)
@@ -68,7 +68,7 @@ void QuitarConectados(ListaConectados *milista,int ID)
 	
 }
 
-void VerConectado(ListaConectados *milista, char conectados[512])
+void VerConectado(ListaConectados *milista, char conectados[512]) // Esta función nos permite ver cuantos usuarios hay conectados
 {
 	int i;
 	strcpy(conectados,"7/");
@@ -79,48 +79,9 @@ void VerConectado(ListaConectados *milista, char conectados[512])
 	printf("%s\n",conectados);
 }
 
+void Desconexion(char consulta [400], char nombre [20]) // Esta funcion sirve para crear la desconexion de un usuario 
+{
 
-void *AtenderCliente (void *socket)
-{   
-	int sock_conn;
-	int *s;
-	s= (int *) socket;
-	sock_conn= *s;
-	
-	//int socket_conn = * (int *) socket;
-
-	char peticion[512];  //inicializacion de variables de peticion-respuesta
-	char respuesta[512];
-	int ret;
-	
-	int terminar =0;
-	/* Fin del bloque de inicializacion del socket*/
-	/*Inicializacion del bloque de consulta SQL*/
-	
-	/* Entramos en un bucle para atender todas las peticiones de este cliente
-	hasta que se desconecte*/
-	while (terminar ==0) {
-		//recepcion de la peticion
-		ret=read(sock_conn,peticion, sizeof(peticion));
-		printf ("Recibido\n");
-		peticion[ret]='\0';
-		printf ("Peticion: %s\n",peticion);// Bucle infinito
-
-		//gestion de la peticion
-		char* p; 
-		p= strtok( peticion, "/");
-		int codigo =  atoi (p);
-		char nombre[20];
-		
-		//if ((codigo !=0)) {
-			p = strtok( NULL, "/");
-			strcpy (nombre, p);
-			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
-		//}
-		
-		//funcion de desconexión
-		if (codigo == 0)
-		{
 			p= strtok(NULL,"/");
 			char contrasenya[20];
 			strcpy (contrasenya, p);
@@ -137,10 +98,11 @@ void *AtenderCliente (void *socket)
 			row = mysql_fetch_row (resultado);
 			IDjug = atoi(row[0]);
 			printf("El ID del jugador es: %d\n", IDjug);
-			QuitarConectados(&milista, IDjug);
-		}
-		//funcion de login de un usuario
-		if (codigo==5) { 
+			QuitarConectados(&milista, IDjug);	
+}
+
+void Login (char consulta[400], char nombre[20], char respuesta [512]) // Esta funcion sirve para logear a un usuario, si no es correcto el nombre o contraseña muestra un mensaje aclarandolo, lo mismo para si es correcto
+{
 			p= strtok(NULL,"/");
 			char contrasenya[20];
 			strcpy (contrasenya, p);
@@ -162,10 +124,10 @@ void *AtenderCliente (void *socket)
 				printf("El ID del jugador es: %d\n", IDjug);
 				PonerConectados(&milista, nombre, IDjug);
 				sprintf(respuesta, "5/Login exitoso\n");
-			}
-		}
-		//funcion de registro del usuario
-		if(codigo==6) { 
+}
+
+void RegistroUsuario (char nombre[20], char respuesta [512]) //Esta funcion registra a un nuevo usuario en el sistema. Si hay alguien con el mismo nombre te avisa y tambien si el registro ha sido exitoso o ha habido algun problema 
+{
 			p = strtok(NULL,"/");
 			char contrasenya[20];
 			strcpy (contrasenya, p);
@@ -226,11 +188,17 @@ void *AtenderCliente (void *socket)
 				}
 			}
 			
-				
-		}
-		//Consulta para  saber la cantidad de partidas que ha ganado una persona
-		if (codigo==1) { 
+}
+
+void PartidasGanadasPorUsuario(char nombre[20], char respuesta[512]) //Consulta en la base de datos las partidas ganadas por un usuario, escribe el numero de partidas ganadas o un mensaje de error
+{
 			int num = 0;
+			char consulta [200];
+			int err;
+			MYSQL_ROW row;
+			MYSQL_RES *resultado;
+			
+			
 			sprintf(consulta,"SELECT COUNT(resultados.PUNTOS) FROM partida,jugador, resultados \n");
 			strcat(consulta,"WHERE (resultados.ID_J = jugador.ID \nAND ");
 			strcat(consulta,"jugador.NOMBRE = partida.GANADOR \nAND resultados.ID_P = partida.ID \nAND ");
@@ -247,10 +215,18 @@ void *AtenderCliente (void *socket)
 			else {
 				num = atoi(row[0]);
 				sprintf(respuesta, "1/El jugador %s ha ganado %d partidas\n", nombre, num);
+				
 			}
-		}
-		//Consulta para saber en quÃ© escenarios 2 jugadores han jugado juntos
-		if (codigo==2) { 
+}
+
+void EscenariosJuntos(char nombre[20], char respuesta[512]) // Consulta en la base de datos los escenarios que dos ususarios han jugado juntos y los escribe en pantalla
+{
+			consulta[200];
+			int err;
+			MYSQL_ROW row;
+			MYSQL_RES *resultado;
+			
+			
 			sprintf(respuesta,"2/");
 			char nombre2[20];
 			char tablero[20];
@@ -288,10 +264,15 @@ void *AtenderCliente (void *socket)
 				}
 			}
 			printf(respuesta);
-		}
-		
-		//Consulta para  saber en quÃ© escenario he obtenido mas puntos
-		if (codigo==3) { 
+}
+
+void EscenarioMasPuntuado (char nombre[20], char respuesta[512]) //Consulta en la base de datos el escenario con mayor puntuacion de un usuario y lo escribe en pantalla
+{
+			char consulta[200];
+			int err;
+			MYSQL_ROW row;
+			MYSQL_RES *resultado;
+			
 			sprintf(consulta,"SELECT partida.ID, partida.TABLERO, resultados.PUNTOS\n");
 			strcat(consulta,"FROM jugador,partida,resultados WHERE\n");
 			sprintf(consulta,"%s (jugador.NOMBRE = '%s' AND\n", consulta, nombre);
@@ -313,11 +294,17 @@ void *AtenderCliente (void *socket)
 				strcpy(respuesta, "3/El escenario donde has obtenido mas puntos es: ");
 				sprintf(respuesta, "%s%s\n", respuesta, resultado);
 			}
-		}
-		
-		//Consulta para saber el tablero de posiciones
-		if (codigo==4) { 
+}
+
+void PosicionesTablero(char nombre[20], char respuesta[512]) //Consulta en la base de datos la posicion de una persona en el tablero y lo escribe en pantalla
+{
+			char consulta[200];
+			int err;
+			MYSQL_ROW row;
+			MYSQL_RES *resultado;
 			int num = 0;
+			
+			
 			sprintf(respuesta,"4/\n");
 			sprintf(consulta,"SELECT jugador.NOMBRE, jugador.PUNTOSACUM \n");
 			strcat(consulta,"FROM jugador ORDER BY jugador.PUNTOSACUM DESC;\n");
@@ -340,6 +327,147 @@ void *AtenderCliente (void *socket)
 				}
 			}
 			printf(respuesta);
+}
+
+
+
+void *AtenderCliente (void *socket)
+{   
+	int sock_conn;
+	int *s;
+	s= (int *) socket;
+	sock_conn= *s;
+	
+	//int socket_conn = * (int *) socket;
+
+	char peticion[512];  //inicializacion de variables de peticion-respuesta
+	char respuesta[512];
+	int ret;
+	int res;
+	
+	int terminar =0;
+	/* Fin del bloque de inicializacion del socket*/
+	/*Inicializacion del bloque de consulta SQL*/
+	MYSQL *conn;
+	int err;
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	char nombre[20];
+	char consulta [400];
+	
+	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
+	if (conn==NULL) {
+		printf("Error al crear la conexion 1 %u %s\n", mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	//else printf("se ha inicializado la conexiÃ³n 1\n");
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "basedatos",0, NULL, 0);
+	if (conn==NULL) {
+		printf ("Error al inicializar la conexion 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	/* Entramos en un bucle para atender todas las peticiones de este cliente
+	hasta que se desconecte*/
+	while (terminar ==0) {
+		//recepcion de la peticion
+		ret=read(sock_conn,peticion, sizeof(peticion));
+		printf ("Recibido\n");
+		peticion[ret]='\0';
+		printf ("Peticion: %s\n",peticion);// Bucle infinito
+
+		//gestion de la peticion
+		char* p; 
+		p= strtok( peticion, "/");
+		int codigo =  atoi (p);
+		char nombre[20];
+		
+		//if ((codigo !=0)) {
+			p = strtok( NULL, "/");
+			strcpy (nombre, p);
+			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
+		//}
+		
+		//funcion de desconexión
+		if (codigo == 0)
+		{
+			char conectados[512];
+			pthread_mutex_lock(&mutex);
+			Desconexion(nombre);
+			pthread_mutex_unlock(&mutex);
+			sprintf(respuesta, "0/Desconectado");
+			printf("%s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+			terminar = 1;
+		}
+		//funcion de login de un usuario
+		if (codigo==5) { 
+			printf("%s\n",nombre);
+			printf("%s\n",contrasena);
+			
+			pthread_mutex_lock(&mutex);
+			Login(nombre, contrasena);
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+			terminar = 1;
+			
+		}
+		//funcion de registro del usuario
+		if(codigo==6) { 
+			printf("%s\n",nombre);
+			printf("%s\n",contrasena);
+			
+			pthread_mutex_lock(&mutex);
+			RegistroUsuario(nombre, contrasena);
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+			terminar = 1;
+				
+				
+		}
+		//Consulta para  saber la cantidad de partidas que ha ganado una persona
+		if (codigo==1) { 
+			pthread_mutex_lock(&mutex);
+			int res = PartidasGanadasPorUsuario(respuesta, nombre);
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+			
+		}
+		//Consulta para saber en quÃ© escenarios 2 jugadores han jugado juntos
+		if (codigo==2) { 
+			pthread_mutex_lock(&mutex);
+			EscenariosJuntos(respuesta, nombre, nombre2);
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+		}
+		
+		//Consulta para  saber en quÃ© escenario he obtenido mas puntos
+		if (codigo==3) { 
+			
+			pthread_mutex_lock(&mutex);
+			EscenarioMasPuntuado(respuesta, nombre); 
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
+		}
+		
+		//Consulta para saber el tablero de posiciones
+		if (codigo==4) { 
+			
+			pthread_mutex_lock(&mutex);
+			PosicionesTablero(respuesta, nombre);
+			pthread_mutex_unlock(&mutex);
+			
+			printf("Respuesta: %s\n", respuesta);
+			write(sock_conn,respuesta,strlen(respuesta));
 		}
 		
 		if (codigo !=0) {
@@ -360,36 +488,6 @@ void *AtenderCliente (void *socket)
 				write (sockets[j], conectados, strlen(conectados));
 			
 		}
-
-
-		else if (codigo == 9){
-			p = strtok( NULL, "/");
-			numForm =  atoi(p);
-			char texto[500];
-			p = strtok(NULL,"/");
-			strcpy(texto, p);
-			char nombre[20];
-			p = strtok(NULL,"/");
-			strcpy(usuario, p);
-			p = strtok(NULL,"/");
-			int Id= atoi(p);
-			
-			char jugadores[200];
-			strcpy(jugadores, mispartidas.partidas[Id].jugadores);
-			
-			char *u = strtok(jugadores,"/");
-			while (u != NULL)
-			{
-				int socketjugador = DameSocket(&milista, u);
-				sprintf (respuesta, "9/%s-%s-%d", usuario, texto, numForm);
-				printf("Respuesta: %s\n", respuesta);
-				write(socketjugador,respuesta,strlen(respuesta));
-				u = strtok(NULL,"/");
-			}
-			
-			
-		}
-
 		if (codigo == 0) 
 			terminar=1;
 		
@@ -397,23 +495,6 @@ void *AtenderCliente (void *socket)
 			
 	// Se acabo el servicio para este cliente
 	close(sock_conn);
-}
-
-int DameSocket (ListaConectados *milista, char nombre[20]){
-	//Devueleve el socket
-	int i=0;
-	int encontrado = 0;
-	while ((i< milista->num) && !encontrado)
-	{
-		if (strcmp(milista->conectados[i].nombre, nombre) == 0)
-			encontrado =1;
-		if (!encontrado)
-			i=i+1;
-	}
-		if (encontrado)
-			return milista->conectados[i].socket;
-		else
-			return 0;
 }
 
 /*Nueva funcion principal*/
@@ -441,25 +522,6 @@ int main(int argc, char *argv[])
 	char peticion[512];  //inicialización de variables de petición-respuesta
 	char respuesta[512];
 	/* Fin del bloque de inicialización del socket*/
-
-	MYSQL *conn;
-	int err;
-	MYSQL_RES *resultado;
-	MYSQL_ROW row;
-	char nombre[20];
-	char consulta [400];
-	
-	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
-	if (conn==NULL) {
-		printf("Error al crear la conexion 1 %u %s\n", mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	//else printf("se ha inicializado la conexiÃ³n 1\n");
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "basedatos",0, NULL, 0);
-	if (conn==NULL) {
-		printf ("Error al inicializar la conexion 2: %u %s\n", mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
 	
 	pthread_t thread;
 	for (;;) {
@@ -474,7 +536,7 @@ int main(int argc, char *argv[])
 		
 		// Crear thead y decirle lo que tiene que hacer
 		
-		pthread_create (&thread, NULL, AtenderCliente,&milista.conectados[milista.num-1].sockets);
+		pthread_create (&thread, NULL, AtenderCliente,&sockets[i]);
 		i=i+1;
 		
 	}
