@@ -16,12 +16,21 @@ namespace WindowsFormsApplication1
     {
         Socket server;
         Thread atender;
+        Thread atender2;
+        string Teinvita;
+        int id;
+        string Tu;
+        int nForm;
+        int logueado = 0;
 
         delegate void DelegadoParaEscribir(string mensaje);
+        List<Form2> formularios = new List<Form2>();
 
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false; //Necesario para que los elementos de los formularios puedan ser
+            //accedidos desde threads diferentes a los que los crearon
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -37,20 +46,35 @@ namespace WindowsFormsApplication1
 
         public void PonContador(string contador)
         {
-            contLbl.Text = contador;
+            ListaConectados.Text = contador;
         }
 
         private void AtenderServidor()
         {
+            string lista = null;
             while (true)
             {
                 //Recibimos mensaje del servidor
                 byte[] msg2 = new byte[180];
                 server.Receive(msg2);
+
+                //Solo para Debugging
+                //string debug = Encoding.ASCII.GetString(msg2);
+                //string mensajedeb = "99/" + debug;
+               // byte[] msg3 = System.Text.Encoding.ASCII.GetBytes(mensajedeb);
+                //server.Send(msg3);
+               
+
                 string[] trozos = Encoding.ASCII.GetString(msg2).Split('/');
                 int codigo = Convert.ToInt32(trozos[0]);
-                string mensaje = trozos[1].Split('\0')[0];
+                string mensaje = "0";
 
+                if (codigo <= 9)
+                {
+                    mensaje = trozos[1].Split('\0')[0];
+                }
+
+                int nForm;
                 switch (codigo)
                 {
                     case 1: //respuesta a numero de victorias
@@ -72,20 +96,76 @@ namespace WindowsFormsApplication1
                         MessageBox.Show(mensaje);
                         break;
                     case 7: //recibimos notifcacion
-                        //contLbl.Text = mensaje;
-                        DelegadoParaEscribir delegado = new DelegadoParaEscribir(PonContador);
-                        contLbl.Invoke(delegado, new object [] {mensaje});
+                        //ListaConectados.Text = mensaje;
+                        this.Invoke(new Action(() =>
+                        {
+                            lista = null;
+                            string[] nombres = mensaje.Split('-');
+                            GridConectados.Rows.Clear();
+                            int i = 0;
+                            while (i < (nombres.Length))
+                            {
+                                try
+                                {
+                                    nombres[i] = Convert.ToString(nombres[i]).Replace("7/", String.Empty);
+                                    GridConectados.Rows.Add(Convert.ToString(nombres[i]));
+                                }
+                                catch
+                                {
+                                }
+                                lista = lista + Convert.ToString(nombres[i]) + "\n";
+                                i++;
+                            }
+                            ListaConectados.Text = lista;
+                        }));
+                        
                         break;
+
+                    case 8: //Abre formulario invitación
+                         this.Invoke(new Action(() =>
+                        {
+                            if (trozos[1] != nombre.Text)
+                            {
+  
+                                //ThreadStart ts = delegate { PonerEnMarchaFormulario(); };
+                                //Thread T = new Thread(ts);
+                                //T.Start();
+                                int cont = formularios.Count;
+                                Form2 f = new Form2(cont, server);
+                                formularios.Add(f);
+                                formularios[cont].MostrarInvitacion(msg2, nombre.Text);
+                                f.ShowDialog();
+                                mensaje = "Esperando resolucion de invitacion";
+                                ListaConectados.Text = mensaje;
+                                //int cont= formularios.Count;
+                            }
+                        }));
+                        break;
+
+                    case 9://Acepta o no
+                        nForm = Convert.ToInt32(trozos[1]);
+                        mensaje = trozos[2].Split('\0')[0];
+                        ListaConectados.Text = mensaje;
+                        if (trozos[2].Split('\0')[0] == "SI")
+                        {
+                            MessageBox.Show("Ha aceptado la invitación");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ha rechazado la invitación");
+                        }
+                        break;
+
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Conexion_Click(object sender, EventArgs e)
         {
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.102");
-            IPEndPoint ipep = new IPEndPoint(direc, 9000);
+            IPEndPoint ipep = new IPEndPoint(direc, 9800);
 
 
             //Creamos el socket 
@@ -112,22 +192,43 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Desconexion_Click(object sender, EventArgs e)
         {  //Mensaje de desconexión
-            string mensaje = "0/" + nombre.Text + "/" + contrasenya.Text;
+            string mensaje;
+            if (logueado == 1)
+            {
+                mensaje = "0/" + nombre.Text + "/" + contrasenya.Text;
+            }
+            else
+            {
+                mensaje = "0/" + "not_logged_user";
+            }
+                
 
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
 
             // Nos desconectamos
             atender.Abort();
+
+            ListaConectados.Text = ("Conéctate para ver los usuarios conectados");
+            GridConectados.Rows.Clear();
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+            logueado = 0;
            
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        /*private void Debugging(object sender, EventArgs e)
+        {
+            string mensaje = "99/" + msg2;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+        }*/
+
+
+        private void Consulta_Click(object sender, EventArgs e)
         {
             if (numero_victoria.Checked)
             {
@@ -136,7 +237,7 @@ namespace WindowsFormsApplication1
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
             }
-            if (P2.Checked)
+            if (ESCENARIOJUNTOS.Checked)
             {
                 string mensaje = "2/" + nombre.Text +"/"+ nombre2.Text;
                 // Enviamos al servidor el nombre tecleado
@@ -144,7 +245,7 @@ namespace WindowsFormsApplication1
                 server.Send(msg);
 
             }
-            if (P3.Checked)
+            if (mejor_escenario.Checked)
             {
                 string mensaje = "3/" + nombre.Text;
                 // Enviamos al servidor el nombre tecleado
@@ -153,7 +254,7 @@ namespace WindowsFormsApplication1
 
             }
 
-            if (P4.Checked)
+            if (tablero_posiciones.Checked)
             {
                 string mensaje = "4/" + nombre.Text;
                 // Enviamos al servidor el nombre tecleado
@@ -163,16 +264,17 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void LogIn_Click(object sender, EventArgs e)
         {
             string mensaje = "5/" + nombre.Text +"/" + contrasenya.Text;
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
+            logueado = 1;
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Registro_Click(object sender, EventArgs e)
         {
             string mensaje = "6/" + nombre.Text + "/" + contrasenya.Text;
             // Enviamos al servidor el nombre tecleado
@@ -190,7 +292,96 @@ namespace WindowsFormsApplication1
         {
 
         }
+        private void PonerEnMarchaFormulario()
+        {
+            int cont = formularios.Count;
+            Form2 f = new Form2(cont, server);
+            formularios.Add(f);
+            f.ShowDialog();
+            cont = formularios.Count;
+        }
 
+        private void Aceptar_Click(object sender, EventArgs e)
+        {
+            ThreadStart ts = delegate { PonerEnMarchaFormulario(); };
+            Thread t = new Thread(ts);
+            t.Start();
+        }
+
+
+       private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Aceptar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GridConectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void BotonInvitar2_Click(object sender, EventArgs e)
+        {
+            string invitados = null;
+            int i = 0;
+            bool invito = true;
+            int numinvitados = GridConectados.SelectedCells.Count;
+            ListaConectados.Text = "Numero de Invitados: " + numinvitados;
+            while (i < GridConectados.Rows.Count)
+            {
+                if (GridConectados.Rows[i].Cells[0].Selected)
+                {
+                    if (GridConectados.Rows[i].Cells[0].Value == null)
+                    {
+                        MessageBox.Show("Tienes que seleccionar un jugador existente, no puedes invitar a una casilla en blanco.");
+                        invito = false;
+                        break;
+                    }
+                    else if (GridConectados.Rows[i].Cells[0].Value.ToString() == nombre.Text)
+                    {
+                        MessageBox.Show("Te estás invitando a ti mismo, intenta invitar a otros jugadores.");
+                        invito = false;
+                        break;
+                    }
+                    else
+                    {
+                        invitados = invitados + "/";
+                        invitados = invitados + GridConectados.Rows[i].Cells[0].Value.ToString();
+                        //invitados = invitados + "/";
+                        i = i + 1;
+                    }
+                }
+                else
+                {
+                    i = i + 1;
+                }
+
+            }
+
+            if (invito == true)
+            {
+                string mensaje = "8/" + nombre.Text + "/" + Convert.ToString(numinvitados) + invitados;
+                // Enviamos al servidor el nombre introducido
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+                MessageBox.Show("Has invitado a los jugadores");
+            }
+        }
+        
 
     }
 }

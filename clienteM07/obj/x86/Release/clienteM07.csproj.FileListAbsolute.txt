@@ -1,0 +1,4 @@
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Release\Cliente_Proyecto.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Release\clienteM07.csproj.GenerateResource.Cache

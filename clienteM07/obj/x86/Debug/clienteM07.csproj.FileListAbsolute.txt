@@ -22,3 +22,67 @@ C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\Proyect
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-Gerard\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\so\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.exe
+C:\Users\User\Desktop\so\ProyectoSistemasOperativos\clienteM07\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente\obj\x86\Debug\Cliente_Proyecto.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\07 06 Cliente Mio 2\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\10 06 Cliente Mio 3\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 4\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 5\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache

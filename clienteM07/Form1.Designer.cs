@@ -28,125 +28,191 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.BoxForm1 = new System.Windows.Forms.GroupBox();
+            this.BotonInvitar2 = new System.Windows.Forms.Button();
+            this.GridConectados = new System.Windows.Forms.DataGridView();
+            this.Jugador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Conectados = new System.Windows.Forms.Label();
+            this.ListaConectados = new System.Windows.Forms.Label();
+            this.BotonChatear = new System.Windows.Forms.Button();
+            this.NOMBREAUXILIAR = new System.Windows.Forms.Label();
             this.nombre2 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.P4 = new System.Windows.Forms.RadioButton();
-            this.P3 = new System.Windows.Forms.RadioButton();
-            this.P2 = new System.Windows.Forms.RadioButton();
+            this.botonRegistrarse = new System.Windows.Forms.Button();
+            this.BotonLogIn = new System.Windows.Forms.Button();
+            this.tablero_posiciones = new System.Windows.Forms.RadioButton();
+            this.mejor_escenario = new System.Windows.Forms.RadioButton();
+            this.ESCENARIOJUNTOS = new System.Windows.Forms.RadioButton();
             this.numero_victoria = new System.Windows.Forms.RadioButton();
             this.contrasenya = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.contraseña = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.contLbl = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.botonConsulta = new System.Windows.Forms.Button();
+            this.Desconexion = new System.Windows.Forms.Button();
+            this.botonConectarme = new System.Windows.Forms.Button();
+            this.usuario = new System.Windows.Forms.Label();
+            this.BoxForm1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridConectados)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // BoxForm1
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.nombre2);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.P4);
-            this.groupBox1.Controls.Add(this.P3);
-            this.groupBox1.Controls.Add(this.P2);
-            this.groupBox1.Controls.Add(this.numero_victoria);
-            this.groupBox1.Controls.Add(this.contrasenya);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.nombre);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(735, 406);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "PETICION";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.BoxForm1.Controls.Add(this.BotonInvitar2);
+            this.BoxForm1.Controls.Add(this.GridConectados);
+            this.BoxForm1.Controls.Add(this.Conectados);
+            this.BoxForm1.Controls.Add(this.ListaConectados);
+            this.BoxForm1.Controls.Add(this.BotonChatear);
+            this.BoxForm1.Controls.Add(this.NOMBREAUXILIAR);
+            this.BoxForm1.Controls.Add(this.nombre2);
+            this.BoxForm1.Controls.Add(this.botonRegistrarse);
+            this.BoxForm1.Controls.Add(this.BotonLogIn);
+            this.BoxForm1.Controls.Add(this.tablero_posiciones);
+            this.BoxForm1.Controls.Add(this.mejor_escenario);
+            this.BoxForm1.Controls.Add(this.ESCENARIOJUNTOS);
+            this.BoxForm1.Controls.Add(this.numero_victoria);
+            this.BoxForm1.Controls.Add(this.contrasenya);
+            this.BoxForm1.Controls.Add(this.contraseña);
+            this.BoxForm1.Controls.Add(this.nombre);
+            this.BoxForm1.Controls.Add(this.botonConsulta);
+            this.BoxForm1.Controls.Add(this.Desconexion);
+            this.BoxForm1.Controls.Add(this.botonConectarme);
+            this.BoxForm1.Controls.Add(this.usuario);
+            this.BoxForm1.Location = new System.Drawing.Point(12, 12);
+            this.BoxForm1.Name = "BoxForm1";
+            this.BoxForm1.Size = new System.Drawing.Size(751, 650);
+            this.BoxForm1.TabIndex = 0;
+            this.BoxForm1.TabStop = false;
+            this.BoxForm1.Text = "Nobody\'s Table";
+            this.BoxForm1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label3
+            // BotonInvitar2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 17);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "NOMBRE AUXILIAR";
+            this.BotonInvitar2.Location = new System.Drawing.Point(578, 406);
+            this.BotonInvitar2.Name = "BotonInvitar2";
+            this.BotonInvitar2.Size = new System.Drawing.Size(135, 36);
+            this.BotonInvitar2.TabIndex = 31;
+            this.BotonInvitar2.Text = "Invitar Jugador/es";
+            this.BotonInvitar2.UseVisualStyleBackColor = true;
+            this.BotonInvitar2.Click += new System.EventHandler(this.BotonInvitar2_Click);
+            // 
+            // GridConectados
+            // 
+            this.GridConectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Jugador});
+            this.GridConectados.Location = new System.Drawing.Point(459, 280);
+            this.GridConectados.Name = "GridConectados";
+            this.GridConectados.Size = new System.Drawing.Size(254, 120);
+            this.GridConectados.TabIndex = 30;
+            this.GridConectados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridConectados_CellContentClick);
+            // 
+            // Jugador
+            // 
+            this.Jugador.HeaderText = "Jugador";
+            this.Jugador.Name = "Jugador";
+            // 
+            // Conectados
+            // 
+            this.Conectados.AutoSize = true;
+            this.Conectados.Location = new System.Drawing.Point(456, 248);
+            this.Conectados.Name = "Conectados";
+            this.Conectados.Size = new System.Drawing.Size(87, 17);
+            this.Conectados.TabIndex = 16;
+            this.Conectados.Text = "Conectados:";
+            this.Conectados.Click += new System.EventHandler(this.label1_Click_2);
+            // 
+            // ListaConectados
+            // 
+            this.ListaConectados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ListaConectados.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListaConectados.Location = new System.Drawing.Point(26, 433);
+            this.ListaConectados.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ListaConectados.Name = "ListaConectados";
+            this.ListaConectados.Size = new System.Drawing.Size(197, 113);
+            this.ListaConectados.TabIndex = 13;
+            // 
+            // BotonChatear
+            // 
+            this.BotonChatear.Location = new System.Drawing.Point(457, 406);
+            this.BotonChatear.Name = "BotonChatear";
+            this.BotonChatear.Size = new System.Drawing.Size(102, 36);
+            this.BotonChatear.TabIndex = 15;
+            this.BotonChatear.Text = "chatear";
+            this.BotonChatear.UseVisualStyleBackColor = true;
+            this.BotonChatear.Click += new System.EventHandler(this.Aceptar_Click);
+            // 
+            // NOMBREAUXILIAR
+            // 
+            this.NOMBREAUXILIAR.AutoSize = true;
+            this.NOMBREAUXILIAR.Location = new System.Drawing.Point(456, 45);
+            this.NOMBREAUXILIAR.Name = "NOMBREAUXILIAR";
+            this.NOMBREAUXILIAR.Size = new System.Drawing.Size(133, 17);
+            this.NOMBREAUXILIAR.TabIndex = 14;
+            this.NOMBREAUXILIAR.Text = "NOMBRE AUXILIAR";
             // 
             // nombre2
             // 
-            this.nombre2.Location = new System.Drawing.Point(182, 105);
+            this.nombre2.Location = new System.Drawing.Point(595, 45);
             this.nombre2.Name = "nombre2";
-            this.nombre2.Size = new System.Drawing.Size(156, 22);
+            this.nombre2.Size = new System.Drawing.Size(134, 22);
             this.nombre2.TabIndex = 13;
             // 
-            // button5
+            // botonRegistrarse
             // 
-            this.button5.Location = new System.Drawing.Point(232, 166);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(128, 60);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "Registrarse";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.botonRegistrarse.Location = new System.Drawing.Point(166, 214);
+            this.botonRegistrarse.Name = "botonRegistrarse";
+            this.botonRegistrarse.Size = new System.Drawing.Size(120, 51);
+            this.botonRegistrarse.TabIndex = 12;
+            this.botonRegistrarse.Text = "Registrarse";
+            this.botonRegistrarse.UseVisualStyleBackColor = true;
+            this.botonRegistrarse.Click += new System.EventHandler(this.Registro_Click);
             // 
-            // button4
+            // BotonLogIn
             // 
-            this.button4.Location = new System.Drawing.Point(62, 175);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 51);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Log In";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.BotonLogIn.Location = new System.Drawing.Point(26, 214);
+            this.BotonLogIn.Name = "BotonLogIn";
+            this.BotonLogIn.Size = new System.Drawing.Size(120, 51);
+            this.BotonLogIn.TabIndex = 11;
+            this.BotonLogIn.Text = "Log In";
+            this.BotonLogIn.UseVisualStyleBackColor = true;
+            this.BotonLogIn.Click += new System.EventHandler(this.LogIn_Click);
             // 
-            // P4
+            // tablero_posiciones
             // 
-            this.P4.AutoSize = true;
-            this.P4.Location = new System.Drawing.Point(432, 244);
-            this.P4.Name = "P4";
-            this.P4.Size = new System.Drawing.Size(170, 21);
-            this.P4.TabIndex = 10;
-            this.P4.TabStop = true;
-            this.P4.Text = "Tablero de Posiciones";
-            this.P4.UseVisualStyleBackColor = true;
+            this.tablero_posiciones.AutoSize = true;
+            this.tablero_posiciones.Location = new System.Drawing.Point(457, 154);
+            this.tablero_posiciones.Name = "tablero_posiciones";
+            this.tablero_posiciones.Size = new System.Drawing.Size(170, 21);
+            this.tablero_posiciones.TabIndex = 10;
+            this.tablero_posiciones.TabStop = true;
+            this.tablero_posiciones.Text = "Tablero de Posiciones";
+            this.tablero_posiciones.UseVisualStyleBackColor = true;
             // 
-            // P3
+            // mejor_escenario
             // 
-            this.P3.AutoSize = true;
-            this.P3.Location = new System.Drawing.Point(429, 205);
-            this.P3.Name = "P3";
-            this.P3.Size = new System.Drawing.Size(131, 21);
-            this.P3.TabIndex = 9;
-            this.P3.TabStop = true;
-            this.P3.Text = "Mejor Escenario";
-            this.P3.UseVisualStyleBackColor = true;
-            this.P3.CheckedChanged += new System.EventHandler(this.P3_CheckedChanged);
+            this.mejor_escenario.AutoSize = true;
+            this.mejor_escenario.Location = new System.Drawing.Point(457, 127);
+            this.mejor_escenario.Name = "mejor_escenario";
+            this.mejor_escenario.Size = new System.Drawing.Size(131, 21);
+            this.mejor_escenario.TabIndex = 9;
+            this.mejor_escenario.TabStop = true;
+            this.mejor_escenario.Text = "Mejor Escenario";
+            this.mejor_escenario.UseVisualStyleBackColor = true;
+            this.mejor_escenario.CheckedChanged += new System.EventHandler(this.P3_CheckedChanged);
             // 
-            // P2
+            // ESCENARIOJUNTOS
             // 
-            this.P2.AutoSize = true;
-            this.P2.Location = new System.Drawing.Point(427, 167);
-            this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(145, 21);
-            this.P2.TabIndex = 8;
-            this.P2.TabStop = true;
-            this.P2.Text = "Escenarios Juntos";
-            this.P2.UseVisualStyleBackColor = true;
+            this.ESCENARIOJUNTOS.AutoSize = true;
+            this.ESCENARIOJUNTOS.Location = new System.Drawing.Point(457, 100);
+            this.ESCENARIOJUNTOS.Name = "ESCENARIOJUNTOS";
+            this.ESCENARIOJUNTOS.Size = new System.Drawing.Size(145, 21);
+            this.ESCENARIOJUNTOS.TabIndex = 8;
+            this.ESCENARIOJUNTOS.TabStop = true;
+            this.ESCENARIOJUNTOS.Text = "Escenarios Juntos";
+            this.ESCENARIOJUNTOS.UseVisualStyleBackColor = true;
             // 
             // numero_victoria
             // 
             this.numero_victoria.AutoSize = true;
-            this.numero_victoria.Location = new System.Drawing.Point(420, 122);
+            this.numero_victoria.Location = new System.Drawing.Point(459, 73);
             this.numero_victoria.Name = "numero_victoria";
             this.numero_victoria.Size = new System.Drawing.Size(157, 21);
             this.numero_victoria.TabIndex = 7;
@@ -156,111 +222,108 @@
             // 
             // contrasenya
             // 
-            this.contrasenya.Location = new System.Drawing.Point(527, 53);
+            this.contrasenya.Location = new System.Drawing.Point(114, 170);
             this.contrasenya.Name = "contrasenya";
-            this.contrasenya.Size = new System.Drawing.Size(195, 22);
+            this.contrasenya.Size = new System.Drawing.Size(127, 22);
             this.contrasenya.TabIndex = 6;
             this.contrasenya.TextChanged += new System.EventHandler(this.contrasenya_TextChanged);
             // 
-            // label2
+            // contraseña
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(409, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Contraseña";
+            this.contraseña.AutoSize = true;
+            this.contraseña.Location = new System.Drawing.Point(23, 170);
+            this.contraseña.Name = "contraseña";
+            this.contraseña.Size = new System.Drawing.Size(85, 17);
+            this.contraseña.TabIndex = 5;
+            this.contraseña.Text = "Contraseña:";
             // 
             // nombre
             // 
-            this.nombre.Location = new System.Drawing.Point(126, 57);
+            this.nombre.Location = new System.Drawing.Point(114, 132);
             this.nombre.Name = "nombre";
-            this.nombre.Size = new System.Drawing.Size(223, 22);
+            this.nombre.Size = new System.Drawing.Size(127, 22);
             this.nombre.TabIndex = 4;
             // 
-            // button3
+            // botonConsulta
             // 
-            this.button3.Location = new System.Drawing.Point(437, 297);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 47);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "enviar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.botonConsulta.Location = new System.Drawing.Point(459, 181);
+            this.botonConsulta.Name = "botonConsulta";
+            this.botonConsulta.Size = new System.Drawing.Size(106, 47);
+            this.botonConsulta.TabIndex = 3;
+            this.botonConsulta.Text = "enviar";
+            this.botonConsulta.UseVisualStyleBackColor = true;
+            this.botonConsulta.Click += new System.EventHandler(this.Consulta_Click);
             // 
-            // button2
+            // Desconexion
             // 
-            this.button2.Location = new System.Drawing.Point(217, 292);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 57);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "DESCONECTAR";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Desconexion.Location = new System.Drawing.Point(144, 45);
+            this.Desconexion.Name = "Desconexion";
+            this.Desconexion.Size = new System.Drawing.Size(118, 52);
+            this.Desconexion.TabIndex = 2;
+            this.Desconexion.Text = "Desconectarme";
+            this.Desconexion.UseVisualStyleBackColor = true;
+            this.Desconexion.Click += new System.EventHandler(this.Desconexion_Click);
             // 
-            // button1
+            // botonConectarme
             // 
-            this.button1.Location = new System.Drawing.Point(47, 292);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 64);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "CONECTAR";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.botonConectarme.Location = new System.Drawing.Point(26, 45);
+            this.botonConectarme.Name = "botonConectarme";
+            this.botonConectarme.Size = new System.Drawing.Size(103, 52);
+            this.botonConectarme.TabIndex = 1;
+            this.botonConectarme.Text = "Conectarme";
+            this.botonConectarme.UseVisualStyleBackColor = true;
+            this.botonConectarme.Click += new System.EventHandler(this.Conexion_Click);
             // 
-            // label1
+            // usuario
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "NOMBRE";
-            // 
-            // contLbl
-            // 
-            this.contLbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.contLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contLbl.Location = new System.Drawing.Point(765, 305);
-            this.contLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.contLbl.Name = "contLbl";
-            this.contLbl.Size = new System.Drawing.Size(197, 113);
-            this.contLbl.TabIndex = 13;
+            this.usuario.AutoSize = true;
+            this.usuario.Location = new System.Drawing.Point(44, 132);
+            this.usuario.Name = "usuario";
+            this.usuario.Size = new System.Drawing.Size(61, 17);
+            this.usuario.TabIndex = 0;
+            this.usuario.Text = "Usuario:";
+            this.usuario.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 493);
-            this.Controls.Add(this.contLbl);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(776, 672);
+            this.Controls.Add(this.BoxForm1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.BoxForm1.ResumeLayout(false);
+            this.BoxForm1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridConectados)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox BoxForm1;
         private System.Windows.Forms.TextBox contrasenya;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label contraseña;
         private System.Windows.Forms.TextBox nombre;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.RadioButton P4;
-        private System.Windows.Forms.RadioButton P3;
-        private System.Windows.Forms.RadioButton P2;
+        private System.Windows.Forms.Button botonConsulta;
+        private System.Windows.Forms.Button Desconexion;
+        private System.Windows.Forms.Button botonConectarme;
+        private System.Windows.Forms.Label usuario;
+        private System.Windows.Forms.Button botonRegistrarse;
+        private System.Windows.Forms.Button BotonLogIn;
+        private System.Windows.Forms.RadioButton tablero_posiciones;
+        private System.Windows.Forms.RadioButton mejor_escenario;
+        private System.Windows.Forms.RadioButton ESCENARIOJUNTOS;
         private System.Windows.Forms.RadioButton numero_victoria;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label NOMBREAUXILIAR;
         private System.Windows.Forms.TextBox nombre2;
-        private System.Windows.Forms.Label contLbl;
+        private System.Windows.Forms.Label ListaConectados;
+        private System.Windows.Forms.Button BotonChatear;
+        private System.Windows.Forms.Label Conectados;
+        private System.Windows.Forms.DataGridView GridConectados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Jugador;
+        private System.Windows.Forms.Button BotonInvitar2;
     }
 }
 
