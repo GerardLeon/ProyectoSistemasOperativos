@@ -22,6 +22,7 @@ namespace WindowsFormsApplication1
         string Tu;
         int nForm;
         int logueado = 0;
+        string chat;
 
         delegate void DelegadoParaEscribir(string mensaje);
         List<Form2> formularios = new List<Form2>();
@@ -29,7 +30,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            CheckForIllegalCrossThreadCalls = false; //Necesario para que los elementos de los formularios puedan ser
+            //CheckForIllegalCrossThreadCalls = false; //Necesario para que los elementos de los formularios puedan ser
             //accedidos desde threads diferentes a los que los crearon
         }
 
@@ -69,7 +70,7 @@ namespace WindowsFormsApplication1
                 int codigo = Convert.ToInt32(trozos[0]);
                 string mensaje = "0";
 
-                if (codigo <= 9)
+                if (codigo <= 100)
                 {
                     mensaje = trozos[1].Split('\0')[0];
                 }
@@ -89,8 +90,13 @@ namespace WindowsFormsApplication1
                     case 4:  //respuesta a tabla de posiciones
                         MessageBox.Show("Tabla de Posiciones: " + mensaje);
                         break;
-                    case 5: //respuesta a login del usuario
+                    case 51: //respuesta a login del usuario
                         MessageBox.Show(mensaje);
+                        logueado = 1;
+                        break;
+                    case 52: //respuesta a login del usuario
+                        MessageBox.Show(mensaje);
+                        logueado = 0;
                         break;
                     case 6: //respuesta a registro del usuario
                         MessageBox.Show(mensaje);
@@ -143,6 +149,8 @@ namespace WindowsFormsApplication1
                         break;
 
                     case 9://Acepta o no
+                        this.Invoke(new Action(() =>
+                        {
                         nForm = Convert.ToInt32(trozos[1]);
                         mensaje = trozos[2].Split('\0')[0];
                         ListaConectados.Text = mensaje;
@@ -154,6 +162,24 @@ namespace WindowsFormsApplication1
                         {
                             MessageBox.Show("Ha rechazado la invitación");
                         }
+                        }));
+                        break;
+                    case 90: //respuesta al eliminar usuario
+                        MessageBox.Show(mensaje);
+                        logueado = 0;
+                        break;
+                    case 10: // Chat
+                        this.Invoke(new Action(() =>
+                        {
+                            string remitente;
+                            string cuerpo;
+                            string lineachat;
+                            remitente = trozos[1].Split('\0')[0];
+                            cuerpo = trozos[2].Split('\0')[0];
+                            lineachat = remitente + ": " + cuerpo + "\n";
+                            chat = chat + lineachat;
+                            ActualizaChat(chat);
+                        }));
                         break;
 
                 }
@@ -165,7 +191,7 @@ namespace WindowsFormsApplication1
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.102");
-            IPEndPoint ipep = new IPEndPoint(direc, 9800);
+            IPEndPoint ipep = new IPEndPoint(direc, 9050);
 
 
             //Creamos el socket 
@@ -207,6 +233,8 @@ namespace WindowsFormsApplication1
 
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
+
+            richTextBox1.Clear();
 
             // Nos desconectamos
             atender.Abort();
@@ -266,12 +294,14 @@ namespace WindowsFormsApplication1
 
         private void LogIn_Click(object sender, EventArgs e)
         {
-            string mensaje = "5/" + nombre.Text +"/" + contrasenya.Text;
-            // Enviamos al servidor el nombre tecleado
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-            server.Send(msg);
-            logueado = 1;
-
+            if (logueado == 0)
+            {
+                string mensaje = "5/" + nombre.Text + "/" + contrasenya.Text;
+                // Enviamos al servidor el nombre tecleado
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+                //logueado = 1;
+            }
         }
 
         private void Registro_Click(object sender, EventArgs e)
@@ -381,7 +411,54 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Has invitado a los jugadores");
             }
         }
-        
 
+      
+
+        private void eliminar_Click(object sender, EventArgs e)
+        {
+            if (logueado == 1)
+            {
+                string mensaje = "90/" + nombre.Text + "/" + contrasenya.Text;
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+                logueado = 0;
+                richTextBox1.Clear();
+            }
+            else
+            {
+                
+            }
+        }
+    
+
+        private void botonChatear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string mensaje = "10/" + nombre.Text + "/" + textBox1.Text;
+            // Enviamos al servidor el mensaje
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+
+            textBox1.Clear();
+        }
+
+        public void ActualizaChat(string chat)
+        {
+            richTextBox1.Text = chat;
+        }
     }
 }

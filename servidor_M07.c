@@ -1,6 +1,6 @@
 /*Servidor del proyecto del grupo 7
-Version: 3
-Fecha: 02/05/2022
+Version: 5
+Fecha: 21/06/2022
 Asignatura: Sistemes Operatius
 Profesor: M. Valero
 Autores: M. Jawhari, G. Leon, J. Martinez, D. Mur.
@@ -103,15 +103,15 @@ int PonerConectados(ListaConectados *milistaConectados,char nombre[20],int socke
 //Retorna 0 si elimina y -1 si el usuario no esta en la lista
 int QuitarDeConectados(ListaConectados *milistaConectados,char nombre[20])
 {
-	//printf("Nombre Que se le envía a DamePosicion: %s\n", nombre);
+	printf("Nombre Que se le envía a DamePosicion: %s\n", nombre);
 	int pos = DamePosicion(milistaConectados, nombre);
-	//printf("DamePosicion (quitardeconectados) devuelve: %d\n", pos);
+	printf("DamePosicion (quitardeconectados) devuelve: %d\n", pos);
 	if (pos == -1)
 		return -1;
 	else {
 		int i = pos;
 		if (pos == 0 && milistaConectados->num == 1) {
-			//printf("Se mete en cas0: %d; i: %d\n", pos, i);
+			printf("Se mete en cas0: %d; i: %d\n", pos, i);
 			strcpy(milistaConectados->conectados[i].nombre, "");
 			//milistaConectados->conectados[i].socket = 0;
 			milistaConectados->num =0;
@@ -119,7 +119,7 @@ int QuitarDeConectados(ListaConectados *milistaConectados,char nombre[20])
 		else {
 			for(i = pos; i < milistaConectados->num-1; i++)
 			{
-				//printf("Se mete en bucle con : %d; i: %d\n", pos, i);
+				printf("Se mete en bucle con : %d; i: %d\n", pos, i);
 				strcpy(milistaConectados->conectados[i].nombre, milistaConectados->conectados[i+1].nombre);
 				milistaConectados->conectados[i].socket = milistaConectados->conectados[i+1].socket;
 			}
@@ -221,7 +221,7 @@ void *AtenderCliente (void *socket)
 	MYSQL_RES *resultado;
 	MYSQL_ROW row;
 	char nombre[20];
-	char consulta [400];
+	char consulta [1000];
 	
 	conn = mysql_init(NULL); //Creamos una conexion al servidor MYSQL
 	if (conn==NULL) {
@@ -254,11 +254,6 @@ void *AtenderCliente (void *socket)
 		int numForm;
 		char conectados[512];
 		
-		//codigo de debugging
-		/*if (codigo == 99) {
-			printf("Mensaje a procesar en cliente: %s\n", peticion);
-		}*/
-		
 		if ((codigo !=0 && codigo != 99)) {
 			p = strtok( NULL, "/");
 			strcpy (nombre, p);
@@ -287,6 +282,28 @@ void *AtenderCliente (void *socket)
 			printf("%s\n", respuesta);
 			write(sock_conn,respuesta,strlen(respuesta));
 			//terminar = 1;
+		}
+
+		if (codigo==90) { 
+			//codigo5modif
+			p= strtok(NULL,"/");
+			strcpy (contrasenya, p);
+			printf("ContraseÃ±a: %s\n",contrasenya);
+			sprintf(consulta, "DELETE FROM jugador WHERE jugador.NOMBRE ='%s' AND jugador.CONTRASENYA ='%s';", nombre, contrasenya);
+			
+			err = mysql_query(conn,consulta);
+			if (err!=0) {
+				printf ("Error al consultar datos de la base %u %s\n",
+				mysql_errno(conn), mysql_error(conn));
+				exit (1);
+				}
+			//resultado = mysql_store_result (conn);
+			//row = mysql_fetch_row (resultado);
+			//printf("El socket del jugador es: %d\n", sock_conn);
+			QuitarDeConectados(&milistaConectados, nombre);
+			sprintf(respuesta, "90/Baja exitosa\n");
+			//strcpy(usuarioconn, nombre);
+			printf("El jugador %s ha sido eliminado de la base de datos.\n", nombre);
 		}
 
 		
@@ -420,12 +437,11 @@ void *AtenderCliente (void *socket)
 			resultado = mysql_store_result (conn);
 			row = mysql_fetch_row (resultado);
 			if (row == NULL)
-				sprintf (respuesta, "5/No existe el usuario y/o la contrasenya es incorrecta\n");
+				sprintf (respuesta, "52/No existe el usuario y/o la contrasenya es incorrecta\n");
 			else {
-		
 				printf("El socket del jugador es: %d\n", sock_conn);
 				PonerConectados(&milistaConectados, nombre, sock_conn);
-				sprintf(respuesta, "5/Login exitoso\n");
+				sprintf(respuesta, "51/Login exitoso\n");
 				//strcpy(usuarioconn, nombre);
 			}
 			
@@ -486,7 +502,7 @@ void *AtenderCliente (void *socket)
 						IDjug = atoi(row[0]);
 						printf("El ID del jugador es: %d\n", IDjug);
 						//PonerConectados(&milistaConectados, nombre, IDjug);
-						sprintf(respuesta, "6/Has sido registrado exitosamente, haz un Log In para comenzar a jugar.\n");
+						sprintf(respuesta, "6/Has sido registrado exitosamente\n");
 					}
 				}
 			}
@@ -494,11 +510,8 @@ void *AtenderCliente (void *socket)
 		
 		//Invitacion a partida
 		if (codigo == 8) {
-			//p = strtok(NULL,"/");
-			//numForm= atoi(p);
 			printf("Código: %d\n",codigo);
 			sprintf(respuesta, "8/Recibido\n");
-			//printf("Formulario: %d\n",numForm);
 			char invitado[30];
 			strcpy(nombre, p);
 			printf("Nombre del anfitrion: %s\n",nombre);
@@ -523,7 +536,7 @@ void *AtenderCliente (void *socket)
 					pthread_mutex_lock(&mutex);
 					int socketjugador = DameSocket(&milistaConectados, invitado);
 					pthread_mutex_unlock(&mutex);
-					printf("Socket del Invitado nº%d: %d\n", socketjugador, i+1);
+					printf("Socket del Invitado nºd: %d\n", socketjugador, i+1);
 					if (socketjugador != 0){
 						sprintf(respuesta, "8/%s/%d", nombre, res1);
 						printf("Invitacion: %s\n", respuesta);
@@ -538,11 +551,10 @@ void *AtenderCliente (void *socket)
 		
 		//Codigo para aceptar una invitacion a una partida
 		if (codigo == 9){
-			
-			printf("Código: %d\n",codigo);
+			printf("CÃ³digo: %d\n",codigo);
 			sprintf(respuesta, "9/Recibido\n");
 			printf("%s\n",peticion);
-			//número de formulario
+			//nÃºmero de formulario
 			p = strtok( NULL, "/");
 			numForm =  atoi(p);
 			printf("Formulario: %d\n",numForm);
@@ -585,15 +597,46 @@ void *AtenderCliente (void *socket)
 				}
 			}
 		}
+
+		if (codigo == 10){
+			//p = strtok( NULL, "/");
+			//numForm =  atoi(p);
+			char texto[500];
+			p = strtok(NULL,"/");
+			strcpy(texto, p);
+			//char usuario[20];
+			//p = strtok(NULL,"/");
+			//strcpy(usuario, p);
+			//p = strtok(NULL,"/");
+			//int Id= atoi(p);
+			
+			//char jugadores[200];
+			//strcpy(jugadores, milistaPartidas.partidas[Id].jugadores);
+			
+			//char *u = strtok(jugadores,"/");
+			//while (u != NULL)
+			//{
+				//int socketjugador = DameSocket(&milistaConectados, u);
+				sprintf (respuesta, "10/%s/%s",nombre, texto);
+				printf("Respuesta: %s\n", respuesta);
+				int j;
+				for (j=0; j<i;j++)
+					write (sockets[j], respuesta, strlen(respuesta));
+			//	write(socketjugador,respuesta,strlen(respuesta));
+			//	u = strtok(NULL,"/");
+			//}
+		}
+
 		
 		//Envio de respuesta para todos los codigos excepto el de desconexion
-		if (codigo !=0 && codigo !=8 && codigo !=9 && codigo !=5) {
+		// o los que ya escriben por su cuenta.
+		if (codigo !=0 && codigo !=8 && codigo !=9 && codigo !=10) {
 			printf ("Respuesta: %s\n", respuesta);
 			write (sock_conn,respuesta, strlen(respuesta));
 		}
 		
 		//Funciones para los codigos relacioandos a la lista de conectados
-		if ((codigo == 0) || (codigo ==5))
+		if ((codigo == 0) || (codigo ==5) || (codigo ==90))
 		{
 			pthread_mutex_lock( &mutex);
 			char notificacion[512];
@@ -607,6 +650,11 @@ void *AtenderCliente (void *socket)
 			for (j=0; j<i;j++)
 				write (sockets[j], notificacion, strlen(notificacion));
 			
+		}
+		
+		//codigo de debugging
+		if (codigo == 99) {
+			printf("Mensaje a procesar en cliente: %s", p);
 		}
 		
 		if (codigo == 0) 
@@ -634,7 +682,7 @@ int main(int argc, char *argv[])
 	serv_adr.sin_family = AF_INET;
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY); // asocia el socket a cualquiera de las IP de la maquina. 
 	
-	serv_adr.sin_port = htons(9800); // establecemos el puerto de escucha
+	serv_adr.sin_port = htons(9050); // establecemos el puerto de escucha
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error en el bind");
 	

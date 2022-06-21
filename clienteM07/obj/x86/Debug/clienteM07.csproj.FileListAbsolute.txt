@@ -86,3 +86,32 @@ C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\Proyect
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\16 06 Cliente Mio 6\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\clienteM07.exe
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\clienteM07.pdb
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\bin\Debug\clienteM07.exe
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\bin\Debug\clienteM07.pdb
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Insti\Desktop\16 06 Cliente Mio 6 - v4\16 06 Cliente Mio 6 - v4\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\prueba\16 06 Cliente Mio 6 - v5 (chat)\obj\x86\Debug\clienteM07.exe
+C:\Users\User\Desktop\prueba\16 06 Cliente Mio 6 - v5 (chat)\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\bin\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\18 06 Cliente v5-David\intento de chatear y eliminar\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\clienteM07.pdb
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\clienteM07.csprojResolveAssemblyReference.cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\obj\x86\Debug\clienteM07.csproj.GenerateResource.Cache
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\bin\Debug\clienteM07.exe
+C:\Users\jmmar\Documents\Mirror\Universidad\21-22 Q2\Sistemas Operativos\ProyectoGitHub-David\19 06 Cliente v5 mio\bin\Debug\clienteM07.pdb
