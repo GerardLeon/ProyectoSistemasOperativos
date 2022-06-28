@@ -24,6 +24,10 @@ namespace WindowsFormsApplication1
         int logueado = 0;
         string chat;
 
+        // Listas de formularios, IDs de partida
+        public List<Form3> formularios3 = new List<Form3>();
+        public List<int> idpartidas = new List<int>();
+        public List<Form4> formularios4 = new List<Form4>();
         delegate void DelegadoParaEscribir(string mensaje);
         List<Form2> formularios = new List<Form2>();
 
@@ -45,11 +49,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        public void PonContador(string contador)
-        {
-            ListaConectados.Text = contador;
-        }
-
+ 
         private void AtenderServidor()
         {
             string lista = null;
@@ -70,7 +70,7 @@ namespace WindowsFormsApplication1
                 int codigo = Convert.ToInt32(trozos[0]);
                 string mensaje = "0";
 
-                if (codigo <= 100)
+                if (codigo <= 100 && codigo != 10)
                 {
                     mensaje = trozos[1].Split('\0')[0];
                 }
@@ -122,7 +122,6 @@ namespace WindowsFormsApplication1
                                 lista = lista + Convert.ToString(nombres[i]) + "\n";
                                 i++;
                             }
-                            ListaConectados.Text = lista;
                         }));
                         
                         break;
@@ -142,7 +141,6 @@ namespace WindowsFormsApplication1
                                 formularios[cont].MostrarInvitacion(msg2, nombre.Text);
                                 f.ShowDialog();
                                 mensaje = "Esperando resolucion de invitacion";
-                                ListaConectados.Text = mensaje;
                                 //int cont= formularios.Count;
                             }
                         }));
@@ -153,10 +151,10 @@ namespace WindowsFormsApplication1
                         {
                         nForm = Convert.ToInt32(trozos[1]);
                         mensaje = trozos[2].Split('\0')[0];
-                        ListaConectados.Text = mensaje;
                         if (trozos[2].Split('\0')[0] == "SI")
                         {
                             MessageBox.Show("Ha aceptado la invitación");
+                            //iniciarForm3();
                         }
                         else
                         {
@@ -168,7 +166,7 @@ namespace WindowsFormsApplication1
                         MessageBox.Show(mensaje);
                         logueado = 0;
                         break;
-                    case 10: // Chat
+                    case 33: // Chat
                         this.Invoke(new Action(() =>
                         {
                             string remitente;
@@ -182,6 +180,55 @@ namespace WindowsFormsApplication1
                         }));
                         break;
 
+                    case 10: //Inicializar form 3
+
+                        string Jugador1;
+                        string Jugador2;
+                        string Jugador3;
+                        string Jugador4;
+                        this.Invoke(new Action(() =>
+                        {
+                                Jugador1 = trozos[1].Split('\0')[0];
+                                Jugador2 = trozos[2].Split('\0')[0];
+                                Jugador3 = trozos[3].Split('\0')[0];
+                                Jugador4 = trozos[4].Split('\0')[0];
+                                //ThreadStart ts = delegate { PonerEnMarchaFormulario(); };
+                                //Thread T = new Thread(ts);
+                                //T.Start();
+                                int cont3 = formularios3.Count;
+                                Form3 f = new Form3(cont3, server);
+                                formularios3.Add(f);
+                                formularios3[cont3].AsignarJugadores(Jugador1, Jugador2, Jugador3, Jugador4, nombre.Text);
+                                f.ShowDialog();
+                                //int cont= formularios.Count;
+                            
+                        }));
+                        break;
+
+                        
+
+                    case 12: // RecibirJugada
+                        this.Invoke(new Action(() =>
+                        {
+                            //ThreadStart ts = delegate { PonerEnMarchaFormulario(); };
+                            //Thread T = new Thread(ts);
+                            //T.Start();
+                        nForm = (Convert.ToInt32(trozos[1].Split('\0')[0]));
+                        string jugadorjugada = trozos[2].Split('\0')[0];
+                        int id = (Convert.ToInt32(trozos[3].Split('\0')[0]));
+                        int num = (Convert.ToInt32(trozos[4].Split('\0')[0]));
+
+                        formularios3[nForm].recibirJugada(jugadorjugada, num);
+                            }));
+                        break;
+
+                   /* case 12: // Siguiente turno
+                        mensaje = trozos[1];
+                        string[] respuesta12 = mensaje.Split(':');
+                        formularios3[idpartidas.IndexOf(Convert.ToInt32(respuesta12[1]))].Jugada(respuesta12[0]);
+                        break;
+                    case 14: //Añade partida a base de datos
+                        break;*/
                 }
             }
         }
@@ -191,7 +238,7 @@ namespace WindowsFormsApplication1
             //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.102");
-            IPEndPoint ipep = new IPEndPoint(direc, 9050);
+            IPEndPoint ipep = new IPEndPoint(direc, 5024);
 
 
             //Creamos el socket 
@@ -238,8 +285,6 @@ namespace WindowsFormsApplication1
 
             // Nos desconectamos
             atender.Abort();
-
-            ListaConectados.Text = ("Conéctate para ver los usuarios conectados");
             GridConectados.Rows.Clear();
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
@@ -256,41 +301,7 @@ namespace WindowsFormsApplication1
         }*/
 
 
-        private void Consulta_Click(object sender, EventArgs e)
-        {
-            if (numero_victoria.Checked)
-            {
-                string mensaje = "1/" + nombre.Text;
-                // Enviamos al servidor el nombre tecleado
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
-            }
-            if (ESCENARIOJUNTOS.Checked)
-            {
-                string mensaje = "2/" + nombre.Text +"/"+ nombre2.Text;
-                // Enviamos al servidor el nombre tecleado
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
-
-            }
-            if (mejor_escenario.Checked)
-            {
-                string mensaje = "3/" + nombre.Text;
-                // Enviamos al servidor el nombre tecleado
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
-
-            }
-
-            if (tablero_posiciones.Checked)
-            {
-                string mensaje = "4/" + nombre.Text;
-                // Enviamos al servidor el nombre tecleado
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
-
-            }
-        }
+       
 
         private void LogIn_Click(object sender, EventArgs e)
         {
@@ -331,6 +342,23 @@ namespace WindowsFormsApplication1
             cont = formularios.Count;
         }
 
+        private void PonerEnMarchaFormPartida()
+        {
+            int cont = formularios.Count;
+            Form3 f = new Form3(cont, server);
+            formularios3.Add(f);
+            f.ShowDialog();
+            cont = formularios.Count;
+        }
+         private void PonerEnMarchaFormEstadistica()
+        {
+            int cont4 = formularios4.Count;
+            Form4 f = new Form4(cont4, server);
+            formularios4.Add(f);
+            f.ShowDialog();
+            cont4 = formularios4.Count;
+           }
+
         private void Aceptar_Click(object sender, EventArgs e)
         {
             ThreadStart ts = delegate { PonerEnMarchaFormulario(); };
@@ -370,7 +398,6 @@ namespace WindowsFormsApplication1
             int i = 0;
             bool invito = true;
             int numinvitados = GridConectados.SelectedCells.Count;
-            ListaConectados.Text = "Numero de Invitados: " + numinvitados;
             while (i < GridConectados.Rows.Count)
             {
                 if (GridConectados.Rows[i].Cells[0].Selected)
@@ -448,10 +475,17 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string mensaje = "10/" + nombre.Text + "/" + textBox1.Text;
-            // Enviamos al servidor el mensaje
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-            server.Send(msg);
+            if (logueado == 1)
+            {
+                string mensaje = "33/" + nombre.Text + "/" + textBox1.Text;
+                // Enviamos al servidor el mensaje
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+            }
+            else
+            {
+                MessageBox.Show("´Loguéate para chatear.");
+            }
 
             textBox1.Clear();
         }
@@ -460,5 +494,23 @@ namespace WindowsFormsApplication1
         {
             richTextBox1.Text = chat;
         }
+
+        private void estadisticas_Click(object sender, EventArgs e)
+        {
+            if (logueado == 1)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    int cont4 = formularios4.Count;
+                    Form4 f = new Form4(cont4, server);
+                    formularios4.Add(f);
+                    formularios4[cont4].estadisticasjugador(nombre.Text);
+                    f.ShowDialog();
+                }));
+            }
+           
+        }
+
+        
     }
 }
